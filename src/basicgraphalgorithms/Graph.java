@@ -350,24 +350,62 @@ public class Graph<E extends Comparable<E>> implements GraphAPI<E> {
     /*===> BEGIN: Augmented ADT methods <===*/
     @Override
     public boolean isEdge(E fromKey, E toKey) {
-        if(!isEmpty()) {
-
-        }
-        return false;
+        /* find source vertex */
+        Vertex tmpFrom = first;
+        while (tmpFrom != null && fromKey.compareTo(tmpFrom.data) > 0)
+            tmpFrom = tmpFrom.pNextVertex;
+        if (tmpFrom == null || fromKey.compareTo(tmpFrom.data) != 0)
+            return false;
+      /* locate destination vertex */
+        Vertex tmpTo = first;
+        while (tmpTo != null && toKey.compareTo(tmpTo.data) > 0)
+            tmpTo = tmpTo.pNextVertex;
+        if (tmpTo == null || toKey.compareTo(tmpTo.data) != 0)
+            return false;
+      /*check if edge does not exist */
+        Edge tmpEdge = tmpFrom.pEdge;
+        while (tmpEdge != null && tmpEdge.destination != tmpTo)
+            tmpEdge = tmpEdge.pNextEdge;
+      /* if edge does not exist */
+        if (tmpEdge == null)
+            return false;
+        return true;
     }
 
     @Override
     public boolean isPath(E fromKey, E toKey) {
-        //implement this method
+        /* find source vertex */
+        Vertex tmpFrom = first;
+        while (tmpFrom != null && fromKey.compareTo(tmpFrom.data) > 0)
+            tmpFrom = tmpFrom.pNextVertex;
+        if (tmpFrom == null || fromKey.compareTo(tmpFrom.data) != 0)
+            return false;
 
+        /* locate destination vertex */
+        Vertex tmpTo = first;
+        while (tmpTo != null && toKey.compareTo(tmpTo.data) > 0)
+            tmpTo = tmpTo.pNextVertex;
+        if (tmpTo == null || toKey.compareTo(tmpTo.data) != 0)
+            return false;
+
+        /* check if tmpTo is in the path of tmpFrom */
+        while(tmpFrom != null && tmpFrom != tmpTo) {
+            tmpFrom = tmpFrom.pNextVertex;
+        }
+        if(tmpFrom == tmpTo)
+            return true;
         return false;
     }
 
     @Override
     public long countEdges() {
-        //implement this method
-
-        return 0;
+        long sum = 0;
+        Vertex tmpVertex = first;
+        for(int i = 1; i <= order; i++) {
+            sum += tmpVertex.inDeg;
+            tmpVertex = tmpVertex.pNextVertex;
+        }
+        return sum;
     }
 
     /*===> END: Augmented ADT methods <===*/
