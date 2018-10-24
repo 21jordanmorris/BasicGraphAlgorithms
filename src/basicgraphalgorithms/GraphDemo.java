@@ -58,7 +58,7 @@ public class GraphDemo {
                     System.out.printf("Enter the destination vertex: ");
                     int dest = console.nextInt();
                     if (g.isPath(new City(initial), new City(dest))) {
-                        System.out.printf("Shortest route from %s to %s in G:%n", g.retrieveVertex(new City(i)).getLabel().trim(), g.retrieveVertex(new City(j)).getLabel().trim());
+                        System.out.printf("Shortest route from %s to %s in G:%n", g.retrieveVertex(new City(initial)).getLabel().trim(), g.retrieveVertex(new City(dest)).getLabel().trim());
                         System.out.println("=========================================================================================");
                         //Add code here: A detail description of how the output should appear
                         //Add code here to print each leg of the trip from the source to the destination

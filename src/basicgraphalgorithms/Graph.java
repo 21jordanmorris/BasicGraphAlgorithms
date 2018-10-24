@@ -370,6 +370,14 @@ public class Graph<E extends Comparable<E>> implements GraphAPI<E> {
         if (tmpEdge == null)
             return false;
         return true;
+
+//        Simpler Version:
+//        try {
+//            retrieveEdge(fromKey, toKey);
+//        } catch (GraphException e) {
+//            return false;
+//        }
+//        return true;
     }
 
     @Override
@@ -402,7 +410,7 @@ public class Graph<E extends Comparable<E>> implements GraphAPI<E> {
         long sum = 0;
         Vertex tmpVertex = first;
         for(int i = 1; i <= order; i++) {
-            sum += tmpVertex.inDeg;
+            sum += tmpVertex.outDeg;
             tmpVertex = tmpVertex.pNextVertex;
         }
         return sum;
