@@ -1,6 +1,9 @@
 package basicgraphalgorithms;
 
+import sun.awt.image.ImageWatched;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.function.Function;
 
 /**
@@ -350,58 +353,64 @@ public class Graph<E extends Comparable<E>> implements GraphAPI<E> {
     /*===> BEGIN: Augmented ADT methods <===*/
     @Override
     public boolean isEdge(E fromKey, E toKey) {
-        /* find source vertex */
-        Vertex tmpFrom = first;
-        while (tmpFrom != null && fromKey.compareTo(tmpFrom.data) > 0)
-            tmpFrom = tmpFrom.pNextVertex;
-        if (tmpFrom == null || fromKey.compareTo(tmpFrom.data) != 0)
+        try {
+            retrieveEdge(fromKey, toKey);
+        } catch (GraphException e) {
             return false;
-      /* locate destination vertex */
-        Vertex tmpTo = first;
-        while (tmpTo != null && toKey.compareTo(tmpTo.data) > 0)
-            tmpTo = tmpTo.pNextVertex;
-        if (tmpTo == null || toKey.compareTo(tmpTo.data) != 0)
-            return false;
-      /*check if edge does not exist */
-        Edge tmpEdge = tmpFrom.pEdge;
-        while (tmpEdge != null && tmpEdge.destination != tmpTo)
-            tmpEdge = tmpEdge.pNextEdge;
-      /* if edge does not exist */
-        if (tmpEdge == null)
-            return false;
+        }
         return true;
-
-//        Simpler Version:
-//        try {
-//            retrieveEdge(fromKey, toKey);
-//        } catch (GraphException e) {
-//            return false;
-//        }
-//        return true;
     }
 
     @Override
     public boolean isPath(E fromKey, E toKey) {
-        /* find source vertex */
-        Vertex tmpFrom = first;
-        while (tmpFrom != null && fromKey.compareTo(tmpFrom.data) > 0)
-            tmpFrom = tmpFrom.pNextVertex;
-        if (tmpFrom == null || fromKey.compareTo(tmpFrom.data) != 0)
+        if (isEmpty())
             return false;
-
-        /* locate destination vertex */
-        Vertex tmpTo = first;
-        while (tmpTo != null && toKey.compareTo(tmpTo.data) > 0)
-            tmpTo = tmpTo.pNextVertex;
-        if (tmpTo == null || toKey.compareTo(tmpTo.data) != 0)
-            return false;
-
-        /* check if tmpTo is in the path of tmpFrom */
-        while(tmpFrom != null && tmpFrom != tmpTo) {
-            tmpFrom = tmpFrom.pNextVertex;
-        }
-        if(tmpFrom == tmpTo)
+        if (fromKey.compareTo(toKey) == 0)
             return true;
+        Vertex walkPtr = first;
+
+        //Sets Every Vertex to 0
+        while (walkPtr != null) {
+            walkPtr.processed = 0;
+            walkPtr = walkPtr.pNextVertex;
+        }
+
+        //Finds source vertex and sets it to walkPtr
+        walkPtr = first;
+        while (walkPtr != null && fromKey.compareTo(walkPtr.data) > 0)
+            walkPtr = walkPtr.pNextVertex;
+        if (walkPtr == null || fromKey.compareTo(walkPtr.data) != 0)
+            return false;
+
+        ArrayList<Vertex> queue = new ArrayList();
+        Vertex toPtr;
+        Edge edgeWalk;
+        Vertex tmp;
+        //walkPtr = first;
+        while (walkPtr != null) {
+            if (walkPtr.processed < 2) {
+                if (walkPtr.processed < 1) {
+                    queue.add(walkPtr);
+                    walkPtr.processed = 1;
+                }
+            }
+            while (!queue.isEmpty()) {
+                tmp = queue.remove(0);
+                tmp.processed = 2;
+                edgeWalk = tmp.pEdge;
+                while (edgeWalk != null) {
+                    toPtr = edgeWalk.destination;
+                    if (toPtr.data.compareTo(toKey) == 0)
+                        return true;
+                    if (toPtr.processed == 0) {
+                        toPtr.processed = 1;
+                        queue.add(toPtr);
+                    }
+                    edgeWalk = edgeWalk.pNextEdge;
+                }
+            }
+            walkPtr = walkPtr.pNextVertex;
+        }
         return false;
     }
 
@@ -409,7 +418,7 @@ public class Graph<E extends Comparable<E>> implements GraphAPI<E> {
     public long countEdges() {
         long sum = 0;
         Vertex tmpVertex = first;
-        for(int i = 1; i <= order; i++) {
+        for (int i = 1; i <= order; i++) {
             sum += tmpVertex.outDeg;
             tmpVertex = tmpVertex.pNextVertex;
         }

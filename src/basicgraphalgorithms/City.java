@@ -65,4 +65,8 @@ public class City implements Comparable<City> {
     public int compareTo(City another) {
         return key.compareTo(another.key);
     }
+
+    public String toString() {
+        return String.format("(KEY: " + key + ", LABEL: " + label + ")");
+    }
 }

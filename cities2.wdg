@@ -1,0 +1,34 @@
+p 6 18
+
+c  This graph consists of 6 vertices and 18 edges
+c  This is a digraph: edge (i,j) and (j,i) are not
+c  the same.
+c  cities2.wdg
+
+c vertices
+n  	1  	Detroit
+n  	2  	Flint
+n	3	Grand Rapids
+n	4	Kalamazoo
+n 	5	Lansing
+n	6	South Haven
+
+c These are the weighed edges
+e	1	2	2
+e	1	6	25
+e	2	1	2
+e	2	3	5
+e	2	5	8
+e	2	6	4
+e	3	2	5
+e	3	4	24
+e	3	5	12
+e	4	3	24
+e	4	5	19
+e	5	2	8
+e	5	3	12
+e	5	4	19
+e	5	6	27
+e	6	1	25
+e	6	2	4
+e	6	5	27

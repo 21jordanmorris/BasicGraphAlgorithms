@@ -8,6 +8,7 @@ package basicgraphalgorithms;
  */
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
@@ -40,7 +41,18 @@ public class GraphDemo {
                     System.out.println("Transitive Closure Matrix for the Transpose of the Graph In " + args[0]);
                     System.out.println("=========================================================================================");
                     //Add code here to display the matrix with two-character spaces between columns
-
+                    int[][] tMatrix = new int[(int) gPrime.size()][(int) gPrime.size()];
+                    for(int k = 0; k < gPrime.size(); k++) {
+                        City tmpCity1 = new City(k + 1);
+                        for(int l = 0; l < gPrime.size(); l++) {
+                            City tmpCity2 = new City(l + 1);
+                            if(gPrime.isPath(tmpCity1, tmpCity2) || tmpCity1.compareTo(tmpCity2) == 0)
+                                tMatrix[k][l] = 1;
+                            else
+                                tMatrix[k][l] = 0;
+                        }
+                    }
+                    print2DArray(tMatrix);
                     //End add code here
                     System.out.println("=========================================================================================");
                     System.out.println();
@@ -89,7 +101,8 @@ public class GraphDemo {
                     // 4     Halifax
                     // 2     Edmonton
                     //Begin Code
-
+                    gPrime = transpose(g);
+                    gPrime.dfsTraverse(f);
                     //End Code
                     System.out.println("==========================================================================");
                     System.out.println();
@@ -105,7 +118,7 @@ public class GraphDemo {
                     // 4     Halifax
                     // 2     Edmonton
                     //Begin Code
-
+                    g.bfsTraverse(f);
                     //End Code
                     System.out.println("==========================================================================");
                     System.out.println();
@@ -159,6 +172,7 @@ public class GraphDemo {
 
     /**
      * This method reads a text file formatted as described in the project description.
+     *
      * @param filename the name of the DIMACS formatted graph file.
      * @return an instance of a graph.
      */
@@ -205,6 +219,7 @@ public class GraphDemo {
 
     /**
      * Display the menu interface for the application.
+     *
      * @return the menu option selected.
      */
     private static int menu() {
@@ -243,21 +258,41 @@ public class GraphDemo {
      * that is a digraph whose vertices are the same but whose edges are the
      * reverse of those of the specified graph; this method should preserve
      * the specified graph and not mutate it while creating its transpose.
+     *
      * @param g a directed graph (without loops)
      * @return an instance of a graph representing the transpose of the
      * specified graph
      * @throws GraphException
      */
     private static Graph<City> transpose(Graph<City> g) throws GraphException {
-        //implement this method
-
-        return null;
+        if (g.isEmpty())
+            throw new GraphException("Non-existent vertex - transpose(Graph<City g).");
+        Graph<City> newGraph = new Graph<>();
+        double gWeight;
+        int counter = 1;
+        //Copies vertexes into newGraph
+        for (int i = 1; i <= g.size(); i++)
+            newGraph.insertVertex(g.retrieveVertex(new City(i)));
+        while (counter <= g.size()) {
+            City tmpCity = new City(counter);
+            City tmpCityCycle = new City(1);
+            for (int j = 1; j <= g.size(); j++) {
+                if (g.isEdge(tmpCity, tmpCityCycle)) {
+                    gWeight = g.retrieveEdge(tmpCity, tmpCityCycle);
+                    newGraph.insertEdge(tmpCityCycle, tmpCity, gWeight);
+                }
+                tmpCityCycle = new City(j);
+            }
+            counter++;
+        }
+        return newGraph;
     }
 
     /**
      * This method computes the cost and path arrays using the
      * Dijkstra's single-source shortest path greedy algorithm.
-     * @param g an instance of a weighted directed graph
+     *
+     * @param g    an instance of a weighted directed graph
      * @param dist an array containing shortest distances from a source vertex
      * @param pred an array containing predecessor vertices along the shortest path
      * @throws GraphException on call to retrieveEdge on non-existent edge
@@ -293,17 +328,26 @@ public class GraphDemo {
         };
         //Defining an instance of the PriorityQueue class that uses the comparator
         //and complete the implementation of the algorithm
-
+        PriorityQueue<City> pQueue = new PriorityQueue(cmp);
+//        for(int i = 0; i < dist.length; i++)
+//            dist[i] = INFINITY;
+//        for(int j = 0; j < pred.length; j++)
+//            pred[j] = -1;
+//        for(int k = 1; k <= g.size(); k++) {
+//            City tmpCity = new City(k);
+//            if(k != source)
+//                tmpCity.getKey() = INFINITY;
+//        }
+//        source.
     }
 
     /**
      * Determines whether or not the specified undirected graph is connected
+     *
      * @return true if the specified graph is connected; otherwise, false
      * @throws GraphException
      */
     private static boolean isConnected(Graph<City> g) throws GraphException {
-        //implement this method
-
         return false;
     }
 
@@ -314,7 +358,8 @@ public class GraphDemo {
      * The graph is explored in lexicographical order when adding a new vertex to the
      * topological ordering and the graph is not modified. Updates of the degrees
      * and vertices that are selected are tracked using auxiliary data structures.
-     * @param g a digraph
+     *
+     * @param g           a digraph
      * @param linearOrder the topological ordering of the vertices
      * @return true if a topological ordering of the vertices of the specified digraph
      * exists; otherwise, false.
@@ -328,30 +373,33 @@ public class GraphDemo {
 
     /**
      * Find the root vertex of the tree in which the specified is
+     *
      * @param parent the parent implementation of a subtree of a graph
-     * @param v a vertex
+     * @param v      a vertex
      * @return the root of this subtree
      */
     private static int find(int[] parent, int v) {
-        //implement this method
-
-        return -1;
+        while (parent[v] != -1) {
+            v = parent[v];
+        }
+        return v;
     }
 
     /**
      * This method generates a minimum spanning tree using Kruskal's
      * algorithm. If no such MST exists, then it generates a minimum spanning forest.
-     * @param g a weighted directed graph
+     *
+     * @param g      a weighted directed graph
      * @param parent the parent implementation of the minimum spanning tree/forest
      * @return the weight of such a tree or forest.
      * @throws GraphException when this graph is empty
-     * <pre>
-     * {@code
-     * If a minimum spanning tree cannot be generated,
-     * the parent implementation of a minimum spanning tree or forest is
-     * determined. This implementation is based on the union-find strategy.
-     * }
-     * </pre>
+     *                        <pre>
+     *                        {@code
+     *                        If a minimum spanning tree cannot be generated,
+     *                        the parent implementation of a minimum spanning tree or forest is
+     *                        determined. This implementation is based on the union-find strategy.
+     *                        }
+     *                        </pre>
      */
     private static double kruskalMST(Graph<City> g, int[] parent) throws GraphException {
         /**
@@ -387,5 +435,14 @@ public class GraphDemo {
         and complete the implementation of the algorithm */
 
         return 0;
+    }
+
+    private static void print2DArray(int[][] array) {
+        for(int i = 0; i <= array.length-1; i++) {
+            for(int j = 0; j <= array.length-1; j++) {
+                System.out.printf("%-2d", array[i][j]);
+            }
+            System.out.println();
+        }
     }
 }

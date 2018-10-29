@@ -1,0 +1,36 @@
+p 13 15
+
+c  This graph consists of 13 vertices and 15 edges
+c  city3.wdg
+
+c vertices
+n  	1  	Albion
+n  	2  	Bangor
+n	3	Carson City
+n	4	Detroit
+n 	5	East Grand Rapids
+n	6	Flint
+n  	7  	Grand Rapids
+n  	8  	Hazel Park
+n	9	Ishpeming
+n	10	Jackson
+n 	11	Kalamazoo
+n	12	Lansing
+n	13	Madison Heights
+
+c These are the weighted edges
+e	1	3	24
+e	1	4	25
+e	2	4	170
+e	3	5	54
+e	3	6	71
+e	4	6	68
+e	4	7	158
+e	5	8	146
+e	6	8	58
+e	6	9	404
+e	7	10	105
+e	8	11	142
+e	8	12	83
+e	9	12	409
+e	10	13	82
