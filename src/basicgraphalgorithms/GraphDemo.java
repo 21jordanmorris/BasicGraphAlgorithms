@@ -84,7 +84,7 @@ public class GraphDemo {
                         int[] pred = new int[(int) g.size()];
                         dijkstra(g, dist, pred, initial, dest);
                         //Begin Code
-
+                        System.out.printf("%-15s ->   %-15s 00.00mi", g.retrieveVertex(new City(initial)).getLabel().trim(), g.retrieveVertex(new City(dest)).getLabel().trim());
                         //End code
                         System.out.println("=========================================================================================");
                         System.out.printf("Total distance: %f miles.%n%n", dist[dest - 1]);
@@ -328,17 +328,26 @@ public class GraphDemo {
         };
         //Defining an instance of the PriorityQueue class that uses the comparator
         //and complete the implementation of the algorithm
-        PriorityQueue<City> pQueue = new PriorityQueue(cmp);
-//        for(int i = 0; i < dist.length; i++)
-//            dist[i] = INFINITY;
-//        for(int j = 0; j < pred.length; j++)
-//            pred[j] = -1;
-//        for(int k = 1; k <= g.size(); k++) {
-//            City tmpCity = new City(k);
-//            if(k != source)
-//                tmpCity.getKey() = INFINITY;
-//        }
-//        source.
+        for(int j = 0; j < dist.length; j++)
+            dist[j] = INFINITY;
+        for(int l = 0; l < pred.length; l++)
+            pred[l] = -1;
+        int tracker = -1;
+        double weight;
+        PriorityQueue<Node> pQueue = new PriorityQueue(cmp);
+        pQueue.add(new Node(source, 0));
+        while(!pQueue.isEmpty() && tracker != destination) {
+            tracker = pQueue.peek().id;
+            pQueue.poll();
+            for(int i = 1; i<= pQueue.size(); i++) {
+                weight = g.retrieveEdge(new City(tracker), new City(i));
+                if(dist[i] > dist[tracker] + weight) {
+                    dist[i] = dist[tracker] + weight;
+                    pred[i] = tracker;
+                    pQueue.add(new Node(i, dist[i]));
+                }
+            }
+        }
     }
 
     /**

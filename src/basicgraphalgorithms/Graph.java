@@ -363,53 +363,31 @@ public class Graph<E extends Comparable<E>> implements GraphAPI<E> {
 
     @Override
     public boolean isPath(E fromKey, E toKey) {
-        if (isEmpty())
+        if(isEmpty())
             return false;
-        if (fromKey.compareTo(toKey) == 0)
+        if(fromKey.compareTo(toKey) == 0)
             return true;
-        Vertex walkPtr = first;
-
-        //Sets Every Vertex to 0
-        while (walkPtr != null) {
-            walkPtr.processed = 0;
-            walkPtr = walkPtr.pNextVertex;
-        }
-
-        //Finds source vertex and sets it to walkPtr
-        walkPtr = first;
-        while (walkPtr != null && fromKey.compareTo(walkPtr.data) > 0)
-            walkPtr = walkPtr.pNextVertex;
-        if (walkPtr == null || fromKey.compareTo(walkPtr.data) != 0)
+        Vertex temp = first;
+        while(fromKey.compareTo(temp.data) != 0 && temp != null)
+            temp = temp.pNextVertex;
+        if(temp == null)
             return false;
+        Edge e1;
+        ArrayList<Vertex> p = new ArrayList<>();
+        ArrayList<Vertex> n = new ArrayList<>();
+        n.add(temp);
 
-        ArrayList<Vertex> queue = new ArrayList();
-        Vertex toPtr;
-        Edge edgeWalk;
-        Vertex tmp;
-        //walkPtr = first;
-        while (walkPtr != null) {
-            if (walkPtr.processed < 2) {
-                if (walkPtr.processed < 1) {
-                    queue.add(walkPtr);
-                    walkPtr.processed = 1;
-                }
+        while(!n.isEmpty()) {
+            temp = n.remove(0);
+            if(temp.data.compareTo(toKey) == 0)
+                return true;
+            p.add(temp);
+            e1 = temp.pEdge;
+            while(e1 != null) {
+                if(!p.contains(e1.destination))
+                    n.add(e1.destination);
+                e1 = e1.pNextEdge;
             }
-            while (!queue.isEmpty()) {
-                tmp = queue.remove(0);
-                tmp.processed = 2;
-                edgeWalk = tmp.pEdge;
-                while (edgeWalk != null) {
-                    toPtr = edgeWalk.destination;
-                    if (toPtr.data.compareTo(toKey) == 0)
-                        return true;
-                    if (toPtr.processed == 0) {
-                        toPtr.processed = 1;
-                        queue.add(toPtr);
-                    }
-                    edgeWalk = edgeWalk.pNextEdge;
-                }
-            }
-            walkPtr = walkPtr.pNextVertex;
         }
         return false;
     }
