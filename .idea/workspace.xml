@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7c65a3e-32c0-48bf-8007-391c9e6b27ca" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/Graph.class" afterPath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/Graph.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo$1EdgeType.class" afterPath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo$1EdgeType.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo.class" afterPath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/basicgraphalgorithms/Graph.java" afterPath="$PROJECT_DIR$/src/basicgraphalgorithms/Graph.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java" afterPath="$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,9 +21,21 @@
       <file leaf-file-name="GraphDemo.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="86" column="67" lean-forward="false" selection-start-line="86" selection-start-column="67" selection-end-line="86" selection-end-column="67" />
+            <state relative-caret-position="406">
+              <caret line="337" column="21" lean-forward="false" selection-start-line="337" selection-start-column="21" selection-end-line="337" selection-end-column="21" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/basicgraphalgorithms/Graph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="364" column="47" lean-forward="false" selection-start-line="364" selection-start-column="47" selection-end-line="364" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -590,7 +600,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55296000" />
+    <option name="totallyTimeSpent" value="63284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="0" width="960" height="1040" extended-state="0" />
@@ -602,15 +612,15 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3164278" sideWeight="0.5021322" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.323043" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.323043" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.04" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05111111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -727,10 +737,6 @@
           <caret line="355" column="21" lean-forward="false" selection-start-line="355" selection-start-column="21" selection-end-line="355" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -768,10 +774,6 @@
           <caret line="355" column="21" lean-forward="true" selection-start-line="355" selection-start-column="21" selection-end-line="355" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -809,10 +811,6 @@
           <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -850,10 +848,6 @@
           <caret line="355" column="21" lean-forward="true" selection-start-line="355" selection-start-column="21" selection-end-line="355" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -891,10 +885,6 @@
           <caret line="368" column="36" lean-forward="false" selection-start-line="368" selection-start-column="36" selection-end-line="368" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -932,10 +922,6 @@
           <caret line="355" column="21" lean-forward="false" selection-start-line="355" selection-start-column="21" selection-end-line="355" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -973,10 +959,6 @@
           <caret line="355" column="21" lean-forward="true" selection-start-line="355" selection-start-column="21" selection-end-line="355" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1003,22 +985,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/basicgraphalgorithms/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
+        <state relative-caret-position="289">
           <caret line="364" column="47" lean-forward="false" selection-start-line="364" selection-start-column="47" selection-end-line="364" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10382#10383#0" expanded="true" />
-            <element signature="e#10418#10419#0" expanded="true" />
-            <element signature="e#10458#10459#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="86" column="67" lean-forward="false" selection-start-line="86" selection-start-column="67" selection-end-line="86" selection-end-column="67" />
+        <state relative-caret-position="406">
+          <caret line="337" column="21" lean-forward="false" selection-start-line="337" selection-start-column="21" selection-end-line="337" selection-end-column="21" />
           <folding />
         </state>
       </provider>

@@ -42,11 +42,11 @@ public class GraphDemo {
                     System.out.println("=========================================================================================");
                     //Add code here to display the matrix with two-character spaces between columns
                     int[][] tMatrix = new int[(int) gPrime.size()][(int) gPrime.size()];
-                    for(int k = 0; k < gPrime.size(); k++) {
+                    for (int k = 0; k < gPrime.size(); k++) {
                         City tmpCity1 = new City(k + 1);
-                        for(int l = 0; l < gPrime.size(); l++) {
+                        for (int l = 0; l < gPrime.size(); l++) {
                             City tmpCity2 = new City(l + 1);
-                            if(gPrime.isPath(tmpCity1, tmpCity2) || tmpCity1.compareTo(tmpCity2) == 0)
+                            if (gPrime.isPath(tmpCity1, tmpCity2) || tmpCity1.compareTo(tmpCity2) == 0)
                                 tMatrix[k][l] = 1;
                             else
                                 tMatrix[k][l] = 0;
@@ -84,7 +84,7 @@ public class GraphDemo {
                         int[] pred = new int[(int) g.size()];
                         dijkstra(g, dist, pred, initial, dest);
                         //Begin Code
-                        System.out.printf("%-15s ->   %-15s 00.00mi", g.retrieveVertex(new City(initial)).getLabel().trim(), g.retrieveVertex(new City(dest)).getLabel().trim());
+                        //System.out.printf("%-15s ->   %-15s %.02fmi%n", g.retrieveVertex(new City(initial)).getLabel().trim(), g.retrieveVertex(new City(dest)).getLabel().trim(), g.retrieveEdge());
                         //End code
                         System.out.println("=========================================================================================");
                         System.out.printf("Total distance: %f miles.%n%n", dist[dest - 1]);
@@ -326,25 +326,31 @@ public class GraphDemo {
                 return 1;
             return v1.id - v2.id;
         };
-        //Defining an instance of the PriorityQueue class that uses the comparator
-        //and complete the implementation of the algorithm
-        for(int j = 0; j < dist.length; j++)
+        //Initialize priority queue
+        PriorityQueue<Node> pQueue = new PriorityQueue(cmp);
+        //Initialize each element in dist[] and pred[] to infinity and -1 respectively
+        for (int j = 0; j < g.size(); j++) {
             dist[j] = INFINITY;
-        for(int l = 0; l < pred.length; l++)
-            pred[l] = -1;
+            pred[j] = -1;
+            pQueue.add(new Node(j, dist[j]));
+        }
+        //Set source key to 0
+        dist[source-1] = 0;
+
         int tracker = -1;
         double weight;
-        PriorityQueue<Node> pQueue = new PriorityQueue(cmp);
-        pQueue.add(new Node(source, 0));
-        while(!pQueue.isEmpty() && tracker != destination) {
+        while (!pQueue.isEmpty() && tracker != destination) {
             tracker = pQueue.peek().id;
             pQueue.poll();
-            for(int i = 1; i<= pQueue.size(); i++) {
-                weight = g.retrieveEdge(new City(tracker), new City(i));
-                if(dist[i] > dist[tracker] + weight) {
-                    dist[i] = dist[tracker] + weight;
-                    pred[i] = tracker;
-                    pQueue.add(new Node(i, dist[i]));
+            //Go through each all edges (tracker, vertices)
+            for(int k = 1; k <= pQueue.size(); k++) {
+                if(g.isEdge(new City(tracker), new City(k))) {
+                    weight = g.retrieveEdge(new City(tracker), new City(k));
+                    if(dist[k] > dist[tracker] + weight) {
+                        dist[k] = dist[tracker] + weight;
+                        pred[k] = tracker;
+                        pQueue.add(new Node(k, dist[k]));
+                    }
                 }
             }
         }
@@ -403,12 +409,12 @@ public class GraphDemo {
      * @return the weight of such a tree or forest.
      * @throws GraphException when this graph is empty
      *                        <pre>
-     *                        {@code
-     *                        If a minimum spanning tree cannot be generated,
-     *                        the parent implementation of a minimum spanning tree or forest is
-     *                        determined. This implementation is based on the union-find strategy.
-     *                        }
-     *                        </pre>
+     *                                               {@code
+     *                                               If a minimum spanning tree cannot be generated,
+     *                                               the parent implementation of a minimum spanning tree or forest is
+     *                                               determined. This implementation is based on the union-find strategy.
+     *                                               }
+     *                                               </pre>
      */
     private static double kruskalMST(Graph<City> g, int[] parent) throws GraphException {
         /**
@@ -447,8 +453,8 @@ public class GraphDemo {
     }
 
     private static void print2DArray(int[][] array) {
-        for(int i = 0; i <= array.length-1; i++) {
-            for(int j = 0; j <= array.length-1; j++) {
+        for (int i = 0; i <= array.length - 1; i++) {
+            for (int j = 0; j <= array.length - 1; j++) {
                 System.out.printf("%-2d", array[i][j]);
             }
             System.out.println();
