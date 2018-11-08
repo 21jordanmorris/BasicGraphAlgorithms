@@ -7,6 +7,8 @@ package basicgraphalgorithms;
  * weighted digraph algorithms
  */
 
+import jdk.nashorn.internal.runtime.Undefined;
+
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
@@ -84,7 +86,23 @@ public class GraphDemo {
                         int[] pred = new int[(int) g.size()];
                         dijkstra(g, dist, pred, initial, dest);
                         //Begin Code
-                        //System.out.printf("%-15s ->   %-15s %.02fmi%n", g.retrieveVertex(new City(initial)).getLabel().trim(), g.retrieveVertex(new City(dest)).getLabel().trim(), g.retrieveEdge());
+                        Stack<Integer> stack = new Stack<>();
+                        stack.add(dest);
+                        int curr = dest;
+
+                        while (pred[curr - 1] != -1) {
+                            curr = pred[curr - 1];
+                            stack.add(curr);
+                        }
+
+                        while (!stack.isEmpty()) {
+                            int temp = stack.pop();
+                            City c = new City(temp);
+                            if (!stack.isEmpty()) {
+                                City topCity = new City(stack.peek());
+                                System.out.printf("%-20s->%-20s%.02f%n", g.retrieveVertex(c).getLabel(), g.retrieveVertex(topCity).getLabel());
+                            }
+                        }
                         //End code
                         System.out.println("=========================================================================================");
                         System.out.printf("Total distance: %f miles.%n%n", dist[dest - 1]);
@@ -326,33 +344,37 @@ public class GraphDemo {
                 return 1;
             return v1.id - v2.id;
         };
-        //Initialize priority queue
-        PriorityQueue<Node> pQueue = new PriorityQueue(cmp);
-        //Initialize each element in dist[] and pred[] to infinity and -1 respectively
-        for (int j = 0; j < g.size(); j++) {
-            dist[j] = INFINITY;
-            pred[j] = -1;
-            pQueue.add(new Node(j, dist[j]));
+        boolean[] visited = new boolean[dist.length];
+        for (int i = 0; i < dist.length; i++) {
+            dist[i] = INFINITY;
+            pred[i] = -1;
+            visited[i] = false;
         }
-        //Set source key to 0
-        dist[source-1] = 0;
-
-        int tracker = -1;
-        double weight;
-        while (!pQueue.isEmpty() && tracker != destination) {
-            tracker = pQueue.peek().id;
-            pQueue.poll();
-            //Go through each all edges (tracker, vertices)
-            for(int k = 1; k <= pQueue.size(); k++) {
-                if(g.isEdge(new City(tracker), new City(k))) {
-                    weight = g.retrieveEdge(new City(tracker), new City(k));
-                    if(dist[k] > dist[tracker] + weight) {
-                        dist[k] = dist[tracker] + weight;
-                        pred[k] = tracker;
-                        pQueue.add(new Node(k, dist[k]));
+        dist[source - 1] = 0;
+        visited[source - 1] = true;
+        int x = source - 1;
+        while (true) {
+            for (int j = 0; j < dist.length; j++) {
+                if (g.isEdge(g.retrieveVertex(new City(x + 1)), g.retrieveVertex(new City(j + 1))) && !visited[j]) {
+                    double newDist = dist[x] + g.retrieveEdge(g.retrieveVertex(new City(x + 1)), g.retrieveVertex(new City(j + 1)));
+                    if (newDist < dist[j]) {
+                        dist[j] = newDist;
+                        pred[j] = x;
                     }
                 }
             }
+            visited[x] = true;
+            if (visited[destination - 1])
+                return;
+            double minDist = INFINITY;
+            int minIndex = -1;
+            for (int k = 0; k < dist.length; k++) {
+                if (dist[k] < minDist && !visited[k]) {
+                    minDist = dist[k];
+                    minIndex = k;
+                }
+            }
+            x = minIndex;
         }
     }
 
@@ -363,7 +385,16 @@ public class GraphDemo {
      * @throws GraphException
      */
     private static boolean isConnected(Graph<City> g) throws GraphException {
-        return false;
+        if(g.isEmpty())
+            throw new GraphException("Graph does not have any vertices - isConnected(Graph<City g)");
+        int vertexCount = (int) g.size();
+        City constantVertex = new City(1);
+        for(int i = 1; i <= vertexCount; i++) {
+            City changedVertex = new City(i);
+            if(!g.isPath(constantVertex, changedVertex))
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -380,10 +411,9 @@ public class GraphDemo {
      * exists; otherwise, false.
      */
     private static boolean topSortOutDeg(Graph<City> g, int linearOrder[]) throws GraphException {
-        //implement this method
-        //Out-degree-based topological sort
-
-        return false;
+        if(g.isEmpty() || !isConnected(g))
+            throw new GraphException("The graph does is (1) empty and/or (2) not connected - topSortOutDeg.");
+        
     }
 
     /**
@@ -409,12 +439,12 @@ public class GraphDemo {
      * @return the weight of such a tree or forest.
      * @throws GraphException when this graph is empty
      *                        <pre>
-     *                                               {@code
-     *                                               If a minimum spanning tree cannot be generated,
-     *                                               the parent implementation of a minimum spanning tree or forest is
-     *                                               determined. This implementation is based on the union-find strategy.
-     *                                               }
-     *                                               </pre>
+     * {@code
+     *  If a minimum spanning tree cannot be generated,
+     *  the parent implementation of a minimum spanning tree or forest is
+     *  determined. This implementation is based on the union-find strategy.
+     *  }
+     *  </pre>
      */
     private static double kruskalMST(Graph<City> g, int[] parent) throws GraphException {
         /**
