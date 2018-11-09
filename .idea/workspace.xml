@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7c65a3e-32c0-48bf-8007-391c9e6b27ca" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo$1EdgeType.class" afterPath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo$1EdgeType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo$1Node.class" afterPath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo$1Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo.class" afterPath="$PROJECT_DIR$/out/production/BasicGraphAlgorithms/basicgraphalgorithms/GraphDemo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java" afterPath="$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,8 +27,8 @@
       <file leaf-file-name="GraphDemo.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="415" column="8" lean-forward="false" selection-start-line="415" selection-start-column="8" selection-end-line="415" selection-end-column="8" />
+            <state relative-caret-position="391">
+              <caret line="422" column="26" lean-forward="false" selection-start-line="422" selection-start-column="26" selection-end-line="422" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -542,12 +538,12 @@
       <workItem from="1540166054147" duration="5367000" />
       <workItem from="1540303707907" duration="4147000" />
       <workItem from="1541365035846" duration="5280000" />
-      <workItem from="1541649118364" duration="2109000" />
+      <workItem from="1541649118364" duration="5331000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83428000" />
+    <option name="totallyTimeSpent" value="86650000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1045,8 +1041,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/basicgraphalgorithms/GraphDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="415" column="8" lean-forward="false" selection-start-line="415" selection-start-column="8" selection-end-line="415" selection-end-column="8" />
+        <state relative-caret-position="391">
+          <caret line="422" column="26" lean-forward="false" selection-start-line="422" selection-start-column="26" selection-end-line="422" selection-end-column="26" />
           <folding />
         </state>
       </provider>

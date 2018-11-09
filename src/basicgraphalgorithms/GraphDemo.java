@@ -413,7 +413,23 @@ public class GraphDemo {
     private static boolean topSortOutDeg(Graph<City> g, int linearOrder[]) throws GraphException {
         if(g.isEmpty() || !isConnected(g))
             throw new GraphException("The graph does is (1) empty and/or (2) not connected - topSortOutDeg.");
-        
+
+        /* Creates a boolean array of size V+1 (total vertices + 1) to keep track of visits to vertices.
+         * boolean[0] is not used. */
+        boolean[] visited = new boolean[(int) g.size() + 1];
+        for(int i = 1; i <= g.size(); i++)
+            visited[i] = false;
+
+        int count = (int) g.size();
+
+        /* Implementing the algorithm */
+        for(int i = 1; i <= g.size(); i++) {
+            if(!visited[i]) {
+                visited[i] = true;
+                /* Rest of code goes here */
+
+            }
+        }
     }
 
     /**
