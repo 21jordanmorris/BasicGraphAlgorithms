@@ -411,25 +411,50 @@ public class GraphDemo {
      * exists; otherwise, false.
      */
     private static boolean topSortOutDeg(Graph<City> g, int linearOrder[]) throws GraphException {
-        if(g.isEmpty() || !isConnected(g))
+        if(g.isEmpty())
             throw new GraphException("The graph does is (1) empty and/or (2) not connected - topSortOutDeg.");
 
-        /* Creates a boolean array of size V+1 (total vertices + 1) to keep track of visits to vertices.
-         * boolean[0] is not used. */
-        boolean[] visited = new boolean[(int) g.size() + 1];
+        /* Creates an array that stores each vertex's out degree */
+        int[] outDegree = new int[(int) g.size()];
         for(int i = 1; i <= g.size(); i++)
-            visited[i] = false;
+            outDegree[i-1] = (int) g.outDegree(new City(i));
 
-        int count = (int) g.size();
+        /* Used to keep track of order when inserting keys into linearOrder array */
+        int count = 0;
 
-        /* Implementing the algorithm */
-        for(int i = 1; i <= g.size(); i++) {
-            if(!visited[i]) {
-                visited[i] = true;
-                /* Rest of code goes here */
+        /* Used to make sure that while loop is not infinite if no topo sort exist */
+        int tracker = 1;
 
+        while (tracker <= g.size()) {
+            for (int j = 0; j < outDegree.length; j++) {
+                if (outDegree[j] == 0) {
+                    linearOrder[count] = j + 1;
+                    count++;
+                    /* Checks for adjacent vertices to the current vertex with no out degrees */
+                    for (int k = 1; k <= g.size(); k++) {
+                        if (g.isEdge(new City(k), new City(j + 1))) {
+                            outDegree[k - 1]--;
+                        }
+                    }
+                    /* Marked as -1 to signify that the vertex has been 'removed' */
+                    outDegree[j] = -1;
+
+                    /* Gets out of current loop */
+                    j = outDegree.length + 1;
+
+                    /* Resets tracker in order to stay inside while loop */
+                    tracker = 1;
+                }
+                tracker++;
             }
         }
+
+        /* If outDegree array does not contain all zeros, that means a topo sort does not exist */
+        for(int p = 0; p < outDegree.length; p++) {
+            if(outDegree[p] != -1)
+                return false;
+        }
+        return true;
     }
 
     /**
