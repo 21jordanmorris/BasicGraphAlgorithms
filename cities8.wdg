@@ -1,0 +1,18 @@
+p 6 8
+c This graph consists of 6 vertices and 8 edges
+c city8.wdg
+c vertices
+n 1 Albion
+n 2 Bangor
+n 3 Carson City
+n 4 Detroit
+n 5 East Grand Rapids
+n 6 Flint
+c These are the weighted edges
+e 1 2 4
+e 1 6 2
+e 2 3 6
+e 2 6 5
+e 3 4 3
+e 4 5 2
+e 5 6 4

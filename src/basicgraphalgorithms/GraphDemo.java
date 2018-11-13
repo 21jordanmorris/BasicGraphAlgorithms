@@ -7,6 +7,7 @@ package basicgraphalgorithms;
  * weighted digraph algorithms
  */
 
+import com.sun.javafx.geom.Edge;
 import jdk.nashorn.internal.runtime.Undefined;
 
 import java.io.*;
@@ -386,12 +387,32 @@ public class GraphDemo {
      */
     private static boolean isConnected(Graph<City> g) throws GraphException {
         if(g.isEmpty())
-            throw new GraphException("Graph does not have any vertices - isConnected(Graph<City g)");
-        int vertexCount = (int) g.size();
-        City constantVertex = new City(1);
-        for(int i = 1; i <= vertexCount; i++) {
-            City changedVertex = new City(i);
-            if(!g.isPath(constantVertex, changedVertex))
+            throw new GraphException("Graph does not have any vertices - isConnected(Graph<City> g)");
+
+        /* Sets all vertices to 'not visited' */
+        boolean[] visited = new boolean[(int) g.size()];
+        for(int i = 0; i < visited.length; i++)
+            visited[i] = false;
+
+        Stack<City> queue = new Stack<>();
+        queue.push(new City(1));
+
+        while(!queue.isEmpty()) {
+            City tmpCity = queue.peek();
+            queue.pop();
+            if(!visited[tmpCity.getKey() - 1]) {
+                visited[tmpCity.getKey()-1] = true;
+                for(int j = 1; j <= g.countEdges(); j++) {
+                    if(g.isEdge(tmpCity, new City(j))) {
+                        if(!visited[(new City(j)).getKey() - 1])
+                            queue.push(new City(j));
+                    }
+                }
+            }
+        }
+
+        for(int k = 0; k < visited.length; k++) {
+            if(!visited[k])
                 return false;
         }
         return true;
@@ -419,7 +440,7 @@ public class GraphDemo {
         for(int i = 1; i <= g.size(); i++)
             outDegree[i-1] = (int) g.outDegree(new City(i));
 
-        /* Used to keep track of order when inserting keys into linearOrder array */
+        /* Used to keep track of current index when inserting keys into linearOrder array */
         int count = 0;
 
         /* Used to make sure that while loop is not infinite if no topo sort exist */
@@ -433,6 +454,7 @@ public class GraphDemo {
                     /* Checks for adjacent vertices to the current vertex with no out degrees */
                     for (int k = 1; k <= g.size(); k++) {
                         if (g.isEdge(new City(k), new City(j + 1))) {
+                            /* Decreases out degree of adjacent vertices ('deleting' edges) */
                             outDegree[k - 1]--;
                         }
                     }
@@ -465,9 +487,8 @@ public class GraphDemo {
      * @return the root of this subtree
      */
     private static int find(int[] parent, int v) {
-        while (parent[v] != -1) {
-            v = parent[v];
-        }
+        if(parent[v] != -1)
+            v = find(parent, parent[v]);
         return v;
     }
 
@@ -516,11 +537,77 @@ public class GraphDemo {
                 return 1;
             return 0;
         };
-        //implement this method
-      /*Defining an instance of the PriorityQueue class that uses the comparator above
+        /*Defining an instance of the PriorityQueue class that uses the comparator above
         and complete the implementation of the algorithm */
+        PriorityQueue<EdgeType> pQueue = new PriorityQueue(cmp);
+        boolean[] visited = new boolean[(int) g.size()];
 
-        return 0;
+        /* Inserts all edges into the priority queue */
+        for (int i = 0; i < g.size(); i++) {
+            for (int j = 0; j < g.size(); j++) {
+                if (g.isEdge(new City(i + 1), new City(j + 1))) {
+                    EdgeType edge = new EdgeType();
+                    edge.source = i;
+                    edge.destination = j;
+                    edge.weight = g.retrieveEdge(new City(i + 1), new City(j + 1));
+                    pQueue.add(edge);
+                }
+                if (g.isEdge(new City(j + 1), new City(i + 1))) {
+                    EdgeType edge = new EdgeType();
+                    edge.source = j;
+                    edge.destination = i;
+                    edge.weight = g.retrieveEdge(new City(j + 1), new City(i + 1));
+                    pQueue.add(edge);
+                }
+            }
+        }
+
+        /* Initializes all indexes to -1 */
+        for (int i = 0; i < parent.length; i++)
+            parent[i] = -1;
+
+        double totalWeight = 0;
+
+        while (!pQueue.isEmpty()) {
+
+            EdgeType e1 = pQueue.poll();
+            if (!visited[e1.source]) {
+                if (!visited[e1.destination]) {
+                    totalWeight += e1.weight;
+                    parent[e1.destination] = e1.source;
+                    visited[e1.source] = true;
+                    visited[e1.destination] = true;
+                } else {
+                    totalWeight += e1.weight;
+                    parent[e1.source] = e1.destination;
+                    visited[e1.source] = true;
+                }
+            }
+            if (visited[e1.source]) {
+                if (!visited[e1.destination]) {
+                    totalWeight += e1.weight;
+                    parent[e1.destination] = e1.source;
+                    visited[e1.destination] = true;
+                }
+            }
+            if (find(parent, e1.source) != find(parent, e1.destination)) {
+                totalWeight += e1.weight;
+                Stack<Integer> s = new Stack<>();
+                int i = e1.destination;
+                s.push(e1.source);
+
+                while (i != -1) {
+                    s.push(i);
+                    i = parent[i];
+                }
+                while (s.size() > 1) {
+                    int dest = s.pop();
+                    int source = s.peek();
+                    parent[dest] = source;
+                }
+            }
+        }
+        return totalWeight;
     }
 
     private static void print2DArray(int[][] array) {
